@@ -2,14 +2,17 @@
 #include <stdarg.h>
 #include "main.h"
 /**
- * _printf - Prints Provided String To StdOut 
+ * _printf - Prints Provided String To StdOut
  * @format: String To Be Printed
+ *
+ * Return: No. Of Characters Printed To StdOut
 */
 int _printf(const char *format, ...)
 {
-	va_list Ptr, Copy_ptr;
+	va_list Ptr;
 	void *ptr;
-	Size_t SizeOfString, Char_Printed = 0;
+	Size_t Char_Printed = 0;
+
 	va_start(Ptr, format);
 	while (*format != '\0')
 	{
@@ -18,26 +21,25 @@ int _printf(const char *format, ...)
 			switch (*(++format))
 			{
 			case 'c':
-			ptr = Char(va_arg(Ptr, int));
-			write (1, ptr, 1);
+			Char(va_arg(Ptr, int));
 				break;
 			case 's':
-			va_copy(Copy_ptr, Ptr);
-			SizeOfString = String_Size(va_arg(Copy_ptr, char *));
-			Char_Printed += (SizeOfString - 2);
-			write (1, va_arg(Ptr, char *), SizeOfString);
+			ptr = va_arg(Ptr, char *);
+			Char_Printed += If_String(ptr);
 				break;
 			case '%':
-			ptr = Char('%');;
-			write (1, ptr, 1);
+			Char('%');
 				break;
 			default:
+			Char('%');
+			Char(*format);
+			Char_Printed++;
 				break;
 			}
 		}
 		else
 		{
-			write (1, format, 1);
+			write(STD_OUT, format, 1);
 		}
 		format++;
 		Char_Printed++;
