@@ -1,5 +1,3 @@
-#include <unistd.h>
-#include <stdarg.h>
 #include "main.h"
 /**
  * _printf - Prints Provided String To StdOut
@@ -10,7 +8,6 @@
 int _printf(const char *format, ...)
 {
 	va_list Ptr;
-	void *ptr;
 	Size_t Char_Printed = 0;
 
 	va_start(Ptr, format);
@@ -24,17 +21,21 @@ int _printf(const char *format, ...)
 			Char(va_arg(Ptr, int));
 				break;
 			case 's':
-			ptr = va_arg(Ptr, char *);
-			Char_Printed += If_String(ptr);
+			Char_Printed += If_String(va_arg(Ptr, char *));
 				break;
 			case '%':
 			Char('%');
 				break;
+			case 'i':
+Integer:
+			Char_Printed += If_Integer(va_arg(Ptr, int));
+				break;
+			case 'd':
+			goto Integer;
 			default:
 			Char('%');
 			Char(*format);
 			Char_Printed++;
-				break;
 			}
 		}
 		else
