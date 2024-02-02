@@ -21,7 +21,7 @@ int _printf(const char *format, ...)
 			Char(va_arg(Ptr, int));
 				break;
 			case 's':
-			Char_Printed += If_String(va_arg(Ptr, char *));
+			Char_Printed += PrintString(va_arg(Ptr, char *));
 				break;
 			case '%':
 			Char('%');
