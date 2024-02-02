@@ -7,10 +7,7 @@
 */
 void Char(char c)
 {
-	char *ptr;
-
-	ptr = &c;
-	write(STD_OUT, ptr, 1);
+	write(STD_OUT, &c, 1);
 }
 /**
  * String_Size - Gets Size Of Provided String
@@ -29,12 +26,12 @@ Size_t String_Size(char *string)
 	return (i);
 }
 /**
- * If_String - Prints Provided String To STDOUT
+ * PrintString - Prints Provided String To STDOUT
  * @s: String To Be Printed
  *
  * Return: Size Of String
 */
-Size_t If_String(char *s)
+Size_t PrintString(char *s)
 {
 	Size_t SizeOfString;
 
